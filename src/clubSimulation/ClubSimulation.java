@@ -16,8 +16,8 @@ public class ClubSimulation {
    	static int frameX=400;
 	static int frameY=500;
 	static int yLimit=400;
-	static int gridX=10; //number of x grids in club - default value if not provided on command line
-	static int gridY=10; //number of y grids in club - default value if not provided on command line
+	static int gridX=100; //number of x grids in club - default value if not provided on command line
+	static int gridY=100; //number of y grids in club - default value if not provided on command line
 	static int max=5; //max number of customers - default value if not provided on command line
 	
 	static Clubgoer[] patrons; // array for customer threads
