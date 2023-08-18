@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 
 public class Clubgoer extends Thread {
-	
+	private AtomicBoolean start = new AtomicBoolean(false);
 	public static ClubGrid club; //shared club
 
 	GridBlock currentBlock;
@@ -54,10 +54,14 @@ public class Clubgoer extends Thread {
 	//check to see if user pressed pause button
 	private void checkPause() {
 		// THIS DOES NOTHING - MUST BE FIXED  	
+		//use a cyclic barier
         
     }
 	private void startSim() {
-		// THIS DOES NOTHING - MUST BE FIXED  	
+		// THIS DOES NOTHING - MUST BE FIXED
+		//use a barrier
+		
+
         
     }
 	
