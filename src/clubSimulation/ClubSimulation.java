@@ -1,4 +1,5 @@
 //M. M. Kuttel 2023 mkuttel@gmail.com
+//Best Nkhumeleni 2023
 
 package clubSimulation;
 // the main class, starts all threads
@@ -68,9 +69,16 @@ public class ClubSimulation {
 		// add the listener to the jbutton to handle the "pressed" event
 		startB.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)  {
-			    	  	// THIS DOES NOTHING - MUST BE FIXED  	  
+				System.out.println("Wait 30 seconds, it'll start i promise");
+				patrons[0].start();
+				patrons[1].start();
+				//System.out.println("Thanks for waiting");
+			  	for (int i=2;i<noClubgoers;i++) {
+					patrons[i].start();
+				} 	  
 		    }
 		   });
+		   
 			
 			final JButton pauseB = new JButton("Pause ");;
 			
@@ -138,10 +146,8 @@ public class ClubSimulation {
       	//Start counter thread - for updating counters
       	Thread s = new Thread(counterDisplay);  
       	s.start();
-      	
-      	for (int i=0;i<noClubgoers;i++) {
-			patrons[i].start();
-		}
+
+
  	}
 
 }

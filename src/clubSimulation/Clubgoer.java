@@ -10,9 +10,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 
 public class Clubgoer extends Thread {
-	private AtomicBoolean start = new AtomicBoolean(false);
+	public volatile AtomicBoolean getin = new AtomicBoolean(false);
 	public static ClubGrid club; //shared club
-
+	
 	GridBlock currentBlock;
 	private Random rand;
 	private int movingSpeed;
@@ -58,11 +58,7 @@ public class Clubgoer extends Thread {
         
     }
 	private void startSim() {
-		// THIS DOES NOTHING - MUST BE FIXED
-		//use a barrier
-		
-
-        
+	
     }
 	
 	//get drink at bar
