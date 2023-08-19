@@ -1,0 +1,47 @@
+commit 1b49fe46bffd2b97265f030461cdc3fe68846452
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Sun Aug 20 01:44:48 2023 +0200
+
+    start button works
+
+commit a246be6707460fec6519c592d5135042dd85c75e
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Fri Aug 18 11:33:00 2023 +0200
+
+    starting stages
+
+commit b3c7b16949f66569e7b9ba2dd281fa620fd0a444
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Fri Aug 18 10:41:31 2023 +0200
+
+    started from the bottom
+
+commit 0204a8139a96325030176487c1560bd9a307ad24
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 16 23:15:38 2023 +0200
+
+    first test run
+
+commit af38bc8ca85f37fa910a7cb1f09593d3bd2533e1
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 16 23:15:00 2023 +0200
+
+    first test run
+
+commit 4f19ffd08a4ae4812feb4a294e47339a96f39419
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 16 23:04:02 2023 +0200
+
+    automatically run the program
+
+commit 9b3e44d14b311624859d57e515202377e1b8c005
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 16 22:39:10 2023 +0200
+
+    first commit
+
+commit e4ecd55a562324e879c84070590e9b1b50294ab0
+Author: BestNkhumeleni <69164057+BestNkhumeleni@users.noreply.github.com>
+Date:   Wed Aug 16 15:06:56 2023 +0200
+
+    Initial commit
