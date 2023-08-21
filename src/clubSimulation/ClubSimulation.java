@@ -78,7 +78,9 @@ public class ClubSimulation {
 			  	for (int i=2;i<noClubgoers;i++) {
 					patrons[i].start();
 				} 	  
-		    }
+		    
+			}
+			
 		   });
 		   
 			
@@ -92,14 +94,15 @@ public class ClubSimulation {
 					for (int i=0;i<noClubgoers;i++) {
 						patrons[i].setConditionFalse();
 					} 
-					
+					System.out.println("Unpaused");
 			    } else{
 					for (int i=0;i<noClubgoers;i++) {
 						patrons[i].setConditionTrue();;
 					}
+					System.out.println("paused");
 				}
 				eve[0] = eve[0]+1;
-				System.out.println(eve[0]);
+				//System.out.println(eve[0]);
 			}
 		    });
 		

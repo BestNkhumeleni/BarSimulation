@@ -64,7 +64,7 @@ public class Clubgoer extends Thread {
     }
 	synchronized void setConditionTrue() {
         pause.set(true);
-        notifyAll(); // Notifies all waiting threads to wake up
+        //notifyAll(); // Notifies all waiting threads to wake up
     }
 	synchronized void setConditionFalse(){
 		pause.set(false);
