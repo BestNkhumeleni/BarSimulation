@@ -13,6 +13,7 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ClubSimulation {
+	
 	static int noClubgoers=20;
    	static int frameX=400;
 	static int frameY=500;
@@ -38,6 +39,7 @@ public class ClubSimulation {
     	JFrame frame = new JFrame("club animation"); 
     	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     	frame.setSize(frameX, frameY);
+		
     	
       	JPanel g = new JPanel();
         g.setLayout(new BoxLayout(g, BoxLayout.PAGE_AXIS)); 
@@ -81,14 +83,26 @@ public class ClubSimulation {
 		   
 			
 			final JButton pauseB = new JButton("Pause ");;
-			
+			int[] eve = {1};
 			// add the listener to the jbutton to handle the "pressed" event
 			pauseB.addActionListener(new ActionListener() {
 		      public void actionPerformed(ActionEvent e) {
-		    		// THIS DOES NOTHING - MUST BE FIXED  	
-		      }
+				if (eve[0]%2 == 0){
+					
+					for (int i=0;i<noClubgoers;i++) {
+						patrons[i].setConditionFalse();
+					} 
+					
+			    } else{
+					for (int i=0;i<noClubgoers;i++) {
+						patrons[i].setConditionTrue();;
+					}
+				}
+				eve[0] = eve[0]+1;
+				System.out.println(eve[0]);
+			}
 		    });
-			
+		
 		JButton endB = new JButton("Quit");
 				// add the listener to the jbutton to handle the "pressed" event
 				endB.addActionListener(new ActionListener() {
@@ -146,8 +160,5 @@ public class ClubSimulation {
       	//Start counter thread - for updating counters
       	Thread s = new Thread(counterDisplay);  
       	s.start();
-
-
  	}
-
 }

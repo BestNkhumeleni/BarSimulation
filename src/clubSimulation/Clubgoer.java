@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 
 public class Clubgoer extends Thread {
-	public volatile AtomicBoolean getin = new AtomicBoolean(false);
+	public AtomicBoolean pause = new AtomicBoolean(false);
 	public static ClubGrid club; //shared club
 	
 	GridBlock currentBlock;
@@ -53,10 +53,23 @@ public class Clubgoer extends Thread {
 
 	//check to see if user pressed pause button
 	private void checkPause() {
-		// THIS DOES NOTHING - MUST BE FIXED  	
-		//use a cyclic barier
+		synchronized(pause){
+			while (pause.get()){
+				try{
+					pause.wait();
+				} catch(InterruptedException f) {}
+			}		
+		}
         
     }
+	synchronized void setConditionTrue() {
+        pause.set(true);
+        notifyAll(); // Notifies all waiting threads to wake up
+    }
+	synchronized void setConditionFalse(){
+		pause.set(false);
+        notifyAll(); 
+	}
 	private void startSim() {
 	
     }
