@@ -5,12 +5,9 @@ package clubSimulation;
 // the main class, starts all threads
 import javax.swing.*;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ClubSimulation {
 	
@@ -26,7 +23,7 @@ public class ClubSimulation {
 	static PeopleLocation [] peopleLocations;  //array to keep track of where customers are
 	
 	static PeopleCounter tallys; //counters for number of people inside and outside club
-
+	static AndreTheBarman andre;
 	static ClubView clubView; //threaded panel to display terrain
 	static ClubGrid clubGrid; // club grid
 	static CounterDisplay counterDisplay ; //threaded display of counters
@@ -71,6 +68,8 @@ public class ClubSimulation {
 		// add the listener to the jbutton to handle the "pressed" event
 		startB.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)  {
+				
+				andre.start();
 				System.out.println("Wait 30 seconds, it'll start i promise");
 				for (int i=0;i<noClubgoers;i++) {
 						patrons[i].setStartTrue();
@@ -88,11 +87,13 @@ public class ClubSimulation {
 					for (int i=0;i<noClubgoers;i++) {
 						patrons[i].setConditionFalse();
 					} 
+					andre.setConditionFalse();
 					System.out.println("Unpaused");
 			    } else{
 					for (int i=0;i<noClubgoers;i++) {
 						patrons[i].setConditionTrue();;
 					}
+					andre.setConditionTrue();
 					System.out.println("paused");
 				}
 				eve[0] = eve[0]+1;
@@ -139,9 +140,7 @@ public class ClubSimulation {
 	    peopleLocations = new PeopleLocation[noClubgoers];
 		patrons = new Clubgoer[noClubgoers];
 		
-		Random rand = new Random();
-
-        for (int i=0;i<noClubgoers;i++) {
+		for (int i=0;i<noClubgoers;i++) {
         		peopleLocations[i]=new PeopleLocation(i);
         		int movingSpeed=(int)(Math.random() * (maxWait-minWait)+minWait); //range of speeds for customers
     			patrons[i] = new Clubgoer(i,peopleLocations[i],movingSpeed);
@@ -158,5 +157,7 @@ public class ClubSimulation {
 		for (int i=0;i<noClubgoers;i++) {
 			patrons[i].start();
 		} 
+		andre = new AndreTheBarman();
+		
  	}
 }

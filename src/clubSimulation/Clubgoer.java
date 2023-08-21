@@ -93,6 +93,7 @@ public class Clubgoer extends Thread {
 	//get drink at bar
 		private void getDrink() throws InterruptedException {
 			//FIX SO BARMAN GIVES THE DRINK AND IT IS NOT AUTOMATIC
+			//andre moves left and right and stops when there a someone at the bar
 			thirsty=false;
 			System.out.println("Thread "+this.ID + " got drink at bar position: " + currentBlock.getX()  + " " +currentBlock.getY() );
 			sleep(movingSpeed*5);  //wait a bit
@@ -171,7 +172,7 @@ public class Clubgoer extends Thread {
 			System.out.println("Thread "+ this.ID + " arrived at club"); //output for checking
 			checkPause(); //check whether have been asked to pause
 			enterClub();
-		
+			
 			while (inRoom) {	
 				checkPause(); //check every step
 				if((!thirsty)&&(!wantToLeave)) {
