@@ -2,7 +2,6 @@
 package clubSimulation;
 
 import java.util.Random;
-import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /*
@@ -172,7 +171,7 @@ public class Clubgoer extends Thread {
 			System.out.println("Thread "+ this.ID + " arrived at club"); //output for checking
 			checkPause(); //check whether have been asked to pause
 			enterClub();
-			
+
 			while (inRoom) {	
 				checkPause(); //check every step
 				if((!thirsty)&&(!wantToLeave)) {

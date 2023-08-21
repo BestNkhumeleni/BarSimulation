@@ -23,11 +23,12 @@ public class AndreTheBarman extends Thread {
 	private int ID; //thread ID 
 
 	
-	AndreTheBarman(){
+	AndreTheBarman() throws InterruptedException{
 		this.ID=1;
 		movingSpeed=10; //range of speeds for customers
 		inRoom=true; //not in room yet
 		rand=new Random();
+        currentBlock = new GridBlock(0, 0, false, true, false);
 	}
 	
 	//getter
@@ -120,7 +121,7 @@ public class AndreTheBarman extends Thread {
 		try {
 			startSim(); 
 			checkPause(); //check whether have been asked to pause
-			enterClub();
+			//enterClub();
 			
 			while (inRoom) {	
 				checkPause(); //check every step
