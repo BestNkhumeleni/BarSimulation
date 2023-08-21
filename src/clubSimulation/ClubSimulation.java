@@ -82,7 +82,6 @@ public class ClubSimulation {
 			}
 			
 		   });
-		   
 			
 			final JButton pauseB = new JButton("Pause ");;
 			int[] eve = {1};
@@ -90,7 +89,6 @@ public class ClubSimulation {
 			pauseB.addActionListener(new ActionListener() {
 		      public void actionPerformed(ActionEvent e) {
 				if (eve[0]%2 == 0){
-					
 					for (int i=0;i<noClubgoers;i++) {
 						patrons[i].setConditionFalse();
 					} 
@@ -125,9 +123,6 @@ public class ClubSimulation {
         frame.setContentPane(g);     
         frame.setVisible(true);	
 	}
-	
-	
-
 	public static void main(String[] args) throws InterruptedException {
 		
 		//deal with command line arguments if provided

@@ -58,7 +58,8 @@ public class Clubgoer extends Thread {
 				try{
 					pause.wait();
 				} catch(InterruptedException f) {}
-			}		
+			}
+			//pause.notifyAll(); 		
 		}
         
     }
@@ -67,8 +68,10 @@ public class Clubgoer extends Thread {
         //notifyAll(); // Notifies all waiting threads to wake up
     }
 	synchronized void setConditionFalse(){
-		pause.set(false);
-        notifyAll(); 
+		synchronized(pause){
+			pause.set(false);
+			pause.notifyAll(); 
+		}
 	}
 	private void startSim() {
 	
