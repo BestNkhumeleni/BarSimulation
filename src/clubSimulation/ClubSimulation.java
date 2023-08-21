@@ -72,13 +72,9 @@ public class ClubSimulation {
 		startB.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)  {
 				System.out.println("Wait 30 seconds, it'll start i promise");
-				patrons[0].start();
-				patrons[1].start();
-				//System.out.println("Thanks for waiting");
-			  	for (int i=2;i<noClubgoers;i++) {
-					patrons[i].start();
-				} 	  
-		    
+				for (int i=0;i<noClubgoers;i++) {
+						patrons[i].setStartTrue();
+					} 
 			}
 			
 		   });
@@ -158,5 +154,9 @@ public class ClubSimulation {
       	//Start counter thread - for updating counters
       	Thread s = new Thread(counterDisplay);  
       	s.start();
+
+		for (int i=0;i<noClubgoers;i++) {
+			patrons[i].start();
+		} 
  	}
 }

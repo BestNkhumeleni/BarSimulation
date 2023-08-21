@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Clubgoer extends Thread {
 	public AtomicBoolean pause = new AtomicBoolean(false);
+	public AtomicBoolean start = new AtomicBoolean(false);
 	public static ClubGrid club; //shared club
 	
 	GridBlock currentBlock;
@@ -38,6 +39,12 @@ public class Clubgoer extends Thread {
 	//getter
 	public  boolean inRoom() {
 		return inRoom;
+	}
+	synchronized void setStartTrue(){
+		synchronized(start){
+			start.set(true);
+			start.notifyAll();
+		}
 	}
 	
 	//getter
@@ -74,7 +81,13 @@ public class Clubgoer extends Thread {
 		}
 	}
 	private void startSim() {
-	
+		synchronized(start){
+			while(!start.get()){
+				try{
+					start.wait();
+				} catch(InterruptedException r){}
+			}
+		}
     }
 	
 	//get drink at bar
