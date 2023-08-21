@@ -17,7 +17,7 @@ public class ClubView extends JPanel implements Runnable {
 
 		ClubGrid grid; //shared grid
 		
-		ClubView(PeopleLocation[] custs,  ClubGrid grid,int []exits) { //constructor
+		ClubView(PeopleLocation[] custs,  ClubGrid grid,int []exits, PeopleLocation andre)  { //constructor
 			this.patronLocations=custs; 
 			noPatrons = custs.length;
 			this.grid = grid;
@@ -28,6 +28,7 @@ public class ClubView extends JPanel implements Runnable {
 		    int height = getHeight();
 		    wIncr= width/(maxX+2); //1 space on either side
 		    hIncr= height/(maxY+2);//2 spaces on bottom
+			this.barpersonLocation = andre;
 		}
 		
 		public void paintComponent(Graphics g) {
@@ -93,6 +94,14 @@ public class ClubView extends JPanel implements Runnable {
 		    			//if( customerLocations[i].getArrived()) System.out.println("customer " + i+" waiting outside"); //debug
 		    		}
 		    }
+			if(barpersonLocation.inRoom()){
+				g.setColor(barpersonLocation.getColor());
+				x= (barpersonLocation.getX()+1)*wIncr;
+				y= barpersonLocation.getY()*hIncr;
+				g.fillOval(x+wIncr/4, y+hIncr/4 , wIncr/2, hIncr/2);
+				g.drawString(barpersonLocation.getID()+"",x+wIncr/4, y+wIncr/4);
+
+			}
 		   }
 	
 		public void run() {

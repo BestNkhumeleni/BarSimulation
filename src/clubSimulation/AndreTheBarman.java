@@ -47,6 +47,9 @@ public class AndreTheBarman extends Thread {
 	public int getSpeed() {
 		return movingSpeed;
 	}
+	public PeopleLocation getLocation(){
+		return myLocation;
+	}
 
 	// setter
 
@@ -91,12 +94,13 @@ public class AndreTheBarman extends Thread {
 	public void enterClub() throws InterruptedException {
 		inRoom = true;
 		myLocation.setInRoom(inRoom);
-		myLocation.setColor(new Color(0, 0, 0, 0));
+		myLocation.setColor(new Color(1, 5, 3, 0));
 		myLocation.setLocation(currentBlock);
 		currentBlock = club.enterClub(myLocation); //enter through entrance
 		System.out.println("Andre is here");
 		sleep(movingSpeed / 2); // wait a bit at door
 	}
+
 
 	// go to bar
 	private void headToBar() throws InterruptedException {
@@ -145,6 +149,7 @@ public class AndreTheBarman extends Thread {
 		try {
 			startSim();
 			checkPause(); // check whether have been asked to pause
+			
 			enterClub();
 
 			while (inRoom) {

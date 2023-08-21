@@ -41,7 +41,7 @@ public class ClubSimulation {
 		g.setLayout(new BoxLayout(g, BoxLayout.PAGE_AXIS));
 		g.setSize(frameX, frameY);
 
-		clubView = new ClubView(peopleLocations, clubGrid, exits);
+		clubView = new ClubView(peopleLocations, clubGrid, exits, andre.getLocation());
 		clubView.setSize(frameX, frameY);
 		g.add(clubView);
 
