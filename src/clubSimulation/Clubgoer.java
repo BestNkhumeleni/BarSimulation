@@ -73,11 +73,8 @@ public class Clubgoer extends Thread {
 					pause.wait();
 				} catch (InterruptedException f) {
 				}
-			}
-			
+			}	
 		}
-		
-
 	}
 	public synchronized void Capacity(){
 		Random nap = new Random();
@@ -150,7 +147,9 @@ public class Clubgoer extends Thread {
 	// go head towards exit
 	private void headTowardsExit() throws InterruptedException {
 		GridBlock exit = club.getExit();
-		while(exit.occupied()){} // waits until the exit is unocupied to head outside
+		while(exit.occupied()){
+			sleep(rand.nextInt(100));
+		} // waits until the exit is unocupied to head outside
 		int x_mv = Integer.signum(exit.getX() - currentBlock.getX());// x_mv is -1,0 or 1
 		int y_mv = Integer.signum(exit.getY() - currentBlock.getY());// -1,0 or 1
 		currentBlock = club.move(currentBlock, x_mv, y_mv, myLocation);

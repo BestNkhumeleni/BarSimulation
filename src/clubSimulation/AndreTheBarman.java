@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 
 public class AndreTheBarman extends Thread {
-	public AtomicBoolean pause = new AtomicBoolean(false);
+	public AtomicBoolean andrePause = new AtomicBoolean(false);
 	public AtomicBoolean start = new AtomicBoolean(false);
 	public static ClubGrid club; // shared club
 
@@ -53,29 +53,29 @@ public class AndreTheBarman extends Thread {
 
 	// setter
 
-	// check to see if user pressed pause button
-	private void checkPause() {
-		synchronized (pause) {
-			while (pause.get()) {
+	// check to see if user pressed andrePause button
+	private void checkandrePause() {
+		synchronized (andrePause) {
+			while (andrePause.get()) {
 				try {
-					pause.wait();
+					andrePause.wait();
 				} catch (InterruptedException f) {
 				}
 			}
-			// pause.notifyAll();
+			// andrePause.notifyAll();
 		}
 
 	}
 
 	synchronized void setConditionTrue() {
-		pause.set(true);
+		andrePause.set(true);
 		// notifyAll(); // Notifies all waiting threads to wake up
 	}
 
 	synchronized void setConditionFalse() {
-		synchronized (pause) {
-			pause.set(false);
-			pause.notifyAll();
+		synchronized (andrePause) {
+			andrePause.set(false);
+			andrePause.notifyAll();
 		}
 	}
 
@@ -146,12 +146,12 @@ public class AndreTheBarman extends Thread {
 	public void run() {
 		try {
 			startSim();
-			checkPause(); // check whether have been asked to pause
+			checkandrePause(); // check whether have been asked to andrePause
 			
 			enterClub();
 
 			while (inRoom) {
-				checkPause(); // check every step
+				checkandrePause(); // check every step
 				headToBar();
 				while (currentBlock.getX() > 0) {
 					moveLeft();

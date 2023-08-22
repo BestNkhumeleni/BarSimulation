@@ -92,7 +92,7 @@ public class ClubSimulation {
 				} else {
 					for (int i = 0; i < noClubgoers; i++) {
 						patrons[i].setConditionTrue();
-						;
+						
 					}
 					andre.setConditionTrue();
 					System.out.println("paused");
