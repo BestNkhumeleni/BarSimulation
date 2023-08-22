@@ -150,6 +150,7 @@ public class Clubgoer extends Thread {
 	// go head towards exit
 	private void headTowardsExit() throws InterruptedException {
 		GridBlock exit = club.getExit();
+		while(exit.occupied()){} // waits until the exit is unocupied to head outside
 		int x_mv = Integer.signum(exit.getX() - currentBlock.getX());// x_mv is -1,0 or 1
 		int y_mv = Integer.signum(exit.getY() - currentBlock.getY());// -1,0 or 1
 		currentBlock = club.move(currentBlock, x_mv, y_mv, myLocation);
@@ -199,7 +200,7 @@ public class Clubgoer extends Thread {
 			checkPause();
 			myLocation.setArrived();
 			System.out.println("Thread " + this.ID + " arrived at club"); // output for checking
-			Capacity();
+			Capacity(); //checks if the club is at capacity and waits outside
 			checkPause(); // check whether have been asked to pause
 			enterClub();
 

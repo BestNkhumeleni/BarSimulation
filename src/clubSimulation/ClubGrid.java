@@ -71,9 +71,8 @@ public class ClubGrid {
 	}
 	
 	public GridBlock enterClub(PeopleLocation myLocation) throws InterruptedException  {
-		//counter.personArrived(); //add to counter of people waiting 
+		while(entrance.occupied()){} // checks if entrace is occupied first
 		entrance.get(myLocation.getID());
-		//counter.personEntered(); //add to counter
 		myLocation.setLocation(entrance);
 		myLocation.setInRoom(true);
 		return entrance;
@@ -111,7 +110,7 @@ public class ClubGrid {
 			currentBlock.release();
 			counter.personLeft(); //add to counter
 			myLocation.setInRoom(false);
-			entrance.notifyAll();
+			//entrance.notifyAll();
 	}
 
 	public GridBlock getExit() {
