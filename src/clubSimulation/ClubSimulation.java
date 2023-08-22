@@ -8,6 +8,7 @@ import javax.swing.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ClubSimulation {
 
@@ -27,6 +28,7 @@ public class ClubSimulation {
 	static ClubView clubView; // threaded panel to display terrain
 	static ClubGrid clubGrid; // club grid
 	static CounterDisplay counterDisplay; // threaded display of counters
+	public static AtomicBoolean pause = new AtomicBoolean(false);
 
 	private static int maxWait = 1200; // for the slowest customer
 	private static int minWait = 500; // for the fastest cutomer
@@ -83,19 +85,16 @@ public class ClubSimulation {
 		// add the listener to the jbutton to handle the "pressed" event
 		pauseB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (eve[0] % 2 == 0) {
-					for (int i = 0; i < noClubgoers; i++) {
-						patrons[i].setConditionFalse();
+				synchronized(pause){
+					if (eve[0] % 2 == 0) {
+						pause.set(false);
+						pause.notifyAll();
+						System.out.println("Unpaused");
+					} else {
+						pause.set(true);
+						pause.notifyAll();
+						System.out.println("paused");
 					}
-					andre.setConditionFalse();
-					System.out.println("Unpaused");
-				} else {
-					for (int i = 0; i < noClubgoers; i++) {
-						patrons[i].setConditionTrue();
-						
-					}
-					andre.setConditionTrue();
-					System.out.println("paused");
 				}
 				eve[0] = eve[0] + 1;
 				// System.out.println(eve[0]);
@@ -146,7 +145,7 @@ public class ClubSimulation {
 		for (int i = 0; i < noClubgoers; i++) {
 			peopleLocations[i] = new PeopleLocation(i);
 			int movingSpeed = (int) (Math.random() * (maxWait - minWait) + minWait); // range of speeds for customers
-			patrons[i] = new Clubgoer(i, peopleLocations[i], movingSpeed, tallys);
+			patrons[i] = new Clubgoer(i, peopleLocations[i], movingSpeed, tallys, pause);
 		}
 
 		setupGUI(frameX, frameY, exit); // Start Panel thread - for drawing animation
@@ -160,6 +159,7 @@ public class ClubSimulation {
 		for (int i = 0; i < noClubgoers; i++) {
 			patrons[i].start();
 		}
+		
 
 		andre.start();
 

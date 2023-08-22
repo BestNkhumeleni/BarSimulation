@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 
 public class Clubgoer extends Thread {
-	public AtomicBoolean pause = new AtomicBoolean(false);
+	public AtomicBoolean pause;
 	public AtomicBoolean start = new AtomicBoolean(false);
 	public static ClubGrid club; // shared club
 
@@ -25,7 +25,7 @@ public class Clubgoer extends Thread {
 
 	private int ID; // thread ID
 
-	Clubgoer(int ID, PeopleLocation loc, int speed, PeopleCounter tallys) {
+	Clubgoer(int ID, PeopleLocation loc, int speed, PeopleCounter tallys, AtomicBoolean pause) {
 		this.ID = ID;
 		movingSpeed = speed; // range of speeds for customers
 		this.myLocation = loc; // for easy lookups
@@ -34,6 +34,7 @@ public class Clubgoer extends Thread {
 		wantToLeave = false; // want to stay when arrive
 		rand = new Random();
 		this.tallys = tallys;
+		this.pause = pause;
 	}
 
 	// getter
@@ -76,10 +77,13 @@ public class Clubgoer extends Thread {
 			}	
 		}
 	}
-	public synchronized void Capacity(){
+	public synchronized void Capacity() throws InterruptedException{
 		Random nap = new Random();
+		sleep(rand.nextInt(100));
 		if(!this.inRoom()){
+			
 			tallys.personArrived();
+			
 			while(tallys.overCapacity()){
 				try{
 				sleep(nap.nextInt(100));}// check if the capacity has changed in random intervals
@@ -193,6 +197,7 @@ public class Clubgoer extends Thread {
 
 	public void run() {
 		try {
+	
 			startSim();
 			checkPause();
 			sleep(movingSpeed * (rand.nextInt(100) + 1)); // arriving takes a while
