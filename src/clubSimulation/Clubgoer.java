@@ -21,10 +21,11 @@ public class Clubgoer extends Thread {
 	private boolean inRoom;
 	private boolean thirsty;
 	private boolean wantToLeave;
+	PeopleCounter tallys;
 
 	private int ID; // thread ID
 
-	Clubgoer(int ID, PeopleLocation loc, int speed) {
+	Clubgoer(int ID, PeopleLocation loc, int speed, PeopleCounter tallys) {
 		this.ID = ID;
 		movingSpeed = speed; // range of speeds for customers
 		this.myLocation = loc; // for easy lookups
@@ -32,6 +33,7 @@ public class Clubgoer extends Thread {
 		thirsty = true; // thirsty when arrive
 		wantToLeave = false; // want to stay when arrive
 		rand = new Random();
+		this.tallys = tallys;
 	}
 
 	// getter
@@ -72,7 +74,21 @@ public class Clubgoer extends Thread {
 				} catch (InterruptedException f) {
 				}
 			}
-			// pause.notifyAll();
+			
+		}
+		
+
+	}
+	public synchronized void Capacity(){
+		Random nap = new Random();
+		if(!this.inRoom()){
+			tallys.personArrived();
+			while(tallys.overCapacity()){
+				try{
+				sleep(nap.nextInt(100));}// check if the capacity has changed in random intervals
+				catch(InterruptedException e){}
+			}
+			tallys.personEntered();
 		}
 
 	}
@@ -113,7 +129,7 @@ public class Clubgoer extends Thread {
 	// --------------------------------------------------------
 	// DO NOT CHANGE THE CODE BELOW HERE - it is not necessary
 	// clubgoer enters club
-	public void enterClub() throws InterruptedException {
+	public synchronized void enterClub() throws InterruptedException {
 		currentBlock = club.enterClub(myLocation); // enter through entrance
 		inRoom = true;
 		System.out.println(
@@ -170,7 +186,7 @@ public class Clubgoer extends Thread {
 	}
 
 	// leave club
-	private void leave() throws InterruptedException {
+	private synchronized void leave() throws InterruptedException {
 		club.leaveClub(currentBlock, myLocation);
 		inRoom = false;
 	}
@@ -183,6 +199,7 @@ public class Clubgoer extends Thread {
 			checkPause();
 			myLocation.setArrived();
 			System.out.println("Thread " + this.ID + " arrived at club"); // output for checking
+			Capacity();
 			checkPause(); // check whether have been asked to pause
 			enterClub();
 

@@ -146,7 +146,7 @@ public class ClubSimulation {
 		for (int i = 0; i < noClubgoers; i++) {
 			peopleLocations[i] = new PeopleLocation(i);
 			int movingSpeed = (int) (Math.random() * (maxWait - minWait) + minWait); // range of speeds for customers
-			patrons[i] = new Clubgoer(i, peopleLocations[i], movingSpeed);
+			patrons[i] = new Clubgoer(i, peopleLocations[i], movingSpeed, tallys);
 		}
 
 		setupGUI(frameX, frameY, exit); // Start Panel thread - for drawing animation

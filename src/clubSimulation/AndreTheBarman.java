@@ -96,12 +96,10 @@ public class AndreTheBarman extends Thread {
 		myLocation.setInRoom(inRoom);
 		myLocation.setColor(new Color(1, 5, 3, 0));
 		myLocation.setLocation(currentBlock);
-		currentBlock = club.enterClub(myLocation); //enter through entrance
+		//currentBlock = club.enterClub(myLocation); //enter through entrance
 		System.out.println("Andre is here");
 		sleep(movingSpeed / 2); // wait a bit at door
 	}
-
-
 	// go to bar
 	private void headToBar() throws InterruptedException {
 		int x_mv = rand.nextInt(3) - 1;
