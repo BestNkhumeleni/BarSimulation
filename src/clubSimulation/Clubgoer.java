@@ -89,7 +89,7 @@ public class Clubgoer extends Thread {
 				sleep(nap.nextInt(100));}// check if the capacity has changed in random intervals
 				catch(InterruptedException e){}
 			}
-			tallys.personEntered();
+			
 		}
 
 	}
@@ -133,6 +133,7 @@ public class Clubgoer extends Thread {
 	public synchronized void enterClub() throws InterruptedException {
 		currentBlock = club.enterClub(myLocation); // enter through entrance
 		inRoom = true;
+		tallys.personEntered();
 		System.out.println(
 				"Thread " + this.ID + " entered club at position: " + currentBlock.getX() + " " + currentBlock.getY());
 		sleep(movingSpeed / 2); // wait a bit at door
