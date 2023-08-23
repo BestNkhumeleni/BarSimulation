@@ -95,7 +95,6 @@ public class AndreTheBarman extends Thread {
 	// AndreTheBarman enters club
 	public void enterClub() throws InterruptedException {
 		currentBlock = club.enterClub(myLocation); // enter through entrance
-		//tally.Andre();
 		inRoom = true;
 		myLocation.setColor(new Color(0));
 		//tallys.personEntered();

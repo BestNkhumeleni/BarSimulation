@@ -10,7 +10,7 @@ public class ClubGrid {
 	private final int y;
 	public  final int bar_y;
 	public AndreTheBarman bartender;
-	
+	int i = 0;
 	private GridBlock exit;
 	public GridBlock entrance; //hard coded entrance
 	private final static int minX =5;//minimum x dimension
@@ -88,6 +88,8 @@ public class ClubGrid {
 			myLocation.setLocation(entrance);
 			myLocation.setInRoom(true);
 			counter.personEntered();
+			if (i == 0){counter.Andre();}
+			i++;
 		}
 		return entrance;
 	}
