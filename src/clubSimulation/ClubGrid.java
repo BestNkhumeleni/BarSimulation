@@ -9,6 +9,7 @@ public class ClubGrid {
 	private final int x;
 	private final int y;
 	public  final int bar_y;
+	public AndreTheBarman bartender;
 	
 	private GridBlock exit;
 	private GridBlock entrance; //hard coded entrance
@@ -47,7 +48,15 @@ public class ClubGrid {
 	}
 	
 		public  int getMaxX() {
+			
 		return x;
+	}
+
+	public  int getrealMaxX() {
+			if (x%2 == 0){
+				return x/2 -1;
+			}
+		return x/2;
 	}
 	
 		public int getMaxY() {
@@ -103,7 +112,32 @@ public class ClubGrid {
 		currentBlock.release(); //must release current block
 		myLocation.setLocation(newBlock);
 		return newBlock;
-	} 
+	}
+	public GridBlock move(GridBlock currentBlock,int step_x, int step_y,PeopleLocation myLocation, AndreTheBarman bartender) throws InterruptedException {  //try to move in 
+		
+		int c_x= currentBlock.getX();
+		int c_y= currentBlock.getY();
+		
+		int new_x = c_x+step_x; //new block x coordinates
+		int new_y = c_y+step_y; // new block y  coordinates
+		
+		//restrict i an j to grid
+		if (inPatronArea(new_x,new_y)) {
+			//Invalid move to outside  - ignore
+			return currentBlock;
+		}
+
+		if ((new_x==currentBlock.getX())&&(new_y==currentBlock.getY())) //not actually moving
+			return currentBlock;
+		 
+		GridBlock newBlock = Blocks[new_x][new_y];
+		
+		if (!newBlock.get(myLocation.getID())) return currentBlock; //stay where you are
+			
+		currentBlock.release(); //must release current block
+		myLocation.setLocation(newBlock);
+		return newBlock;
+	}  
 	
 
 	public  void leaveClub(GridBlock currentBlock,PeopleLocation myLocation)   {

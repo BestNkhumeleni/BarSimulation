@@ -22,13 +22,14 @@ public class AndreTheBarman extends Thread {
 	private boolean inRoom;
 	private int ID; // thread ID
 
-	AndreTheBarman(int noClubgoers) throws InterruptedException {
+	AndreTheBarman(int noClubgoers, AtomicBoolean pause) throws InterruptedException {
 		this.ID = noClubgoers;
-		movingSpeed = 10; // range of speeds for customers
+		movingSpeed = 500; // range of speeds for customers
 		inRoom = true; // not in room yet
 		rand = new Random();
 		myLocation = new PeopleLocation(ID);
 		currentBlock = new GridBlock(0, 0, false, true, false);
+		this.andrePause = pause;
 	}
 
 	// getter
@@ -92,30 +93,37 @@ public class AndreTheBarman extends Thread {
 
 	// AndreTheBarman enters club
 	public void enterClub() throws InterruptedException {
+		currentBlock = club.enterClub(myLocation); // enter through entrance
 		inRoom = true;
-		myLocation.setInRoom(inRoom);
-		myLocation.setColor(new Color(1, 5, 3, 0));
-		myLocation.setLocation(currentBlock);
-		//currentBlock = club.enterClub(myLocation); //enter through entrance
-		System.out.println("Andre is here");
-		sleep(movingSpeed / 2); // wait a bit at door
+		myLocation.setColor(new Color(0));
+		//tallys.personEntered();
+		System.out.println(
+				"Thread " + this.ID + " entered club at position: " + currentBlock.getX() + " " + currentBlock.getY());
+		
 	}
 	// go to bar
 	private void headToBar() throws InterruptedException {
-		int x_mv = rand.nextInt(3) - 1;
-		currentBlock = club.move(currentBlock, x_mv, club.getBar_y() - 1, myLocation); // head toward bar
+		int x_mv = 0;
+		int y = club.getBar_y() +1;
+		
+		currentBlock = club.move(currentBlock, x_mv, y, myLocation, this); // head toward bar
+		//System.out.println(myLocation.getX());
 		System.out.println("Andre is at the bar");
 		sleep(movingSpeed / 2); // wait a bit
 	}
 
 	private void moveLeft() throws InterruptedException {
-		int x = myLocation.getX() - 1;
-		currentBlock = club.move(currentBlock, club.getBar_y() - 1, x, myLocation);
+		int x_mv = -1;
+		int y = 0;
+		
+		currentBlock = club.move(currentBlock, x_mv, y, myLocation, this);
 	}
 
 	private void moveRight() throws InterruptedException {
-		int x = myLocation.getX() + 1;
-		currentBlock = club.move(currentBlock, club.getBar_y() - 1, x, myLocation);
+		int x_mv = 1;
+		int y = 0;
+		
+		currentBlock = club.move(currentBlock, x_mv, y, myLocation, this);
 	}
 
 	// go head towards exit
@@ -149,15 +157,23 @@ public class AndreTheBarman extends Thread {
 			checkandrePause(); // check whether have been asked to andrePause
 			
 			enterClub();
-
+			headToBar();
+			
+			
+			
 			while (inRoom) {
 				checkandrePause(); // check every step
-				headToBar();
-				while (currentBlock.getX() > 0) {
+				while(!(myLocation.getX() == 0)){
 					moveLeft();
+					sleep(movingSpeed);
+					checkandrePause();
+					//System.out.println(myLocation.getX());
 				}
-				while (currentBlock.getX() < club.getMaxX()) {
+				while(!(myLocation.getX() == club.getMaxX()-1)){
 					moveRight();
+					sleep(movingSpeed);
+					checkandrePause();
+					//System.out.println(myLocation.getX());
 				}
 			}
 			headTowardsExit();
