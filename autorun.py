@@ -1,3 +1,3 @@
 import os
 os.system("make")
-os.system("java -cp ./bin clubSimulation.ClubSimulation 1 10 10 1")
+os.system("java -cp ./bin clubSimulation.ClubSimulation 20 20 20 5")

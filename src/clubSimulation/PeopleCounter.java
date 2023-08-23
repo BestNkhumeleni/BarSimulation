@@ -41,7 +41,7 @@ public class PeopleCounter {
 	
 	//someone got inside
 	synchronized public void personEntered() {
-		while(this.overCapacity()){try{wait();}catch(InterruptedException e){}}
+		while(this.overCapacity()){try{this.wait();}catch(InterruptedException e){}}
 		peopleOutSide.getAndDecrement();
 		peopleInside.getAndIncrement();
 	}
@@ -54,7 +54,7 @@ public class PeopleCounter {
 	synchronized public void personLeft() {
 		peopleInside.getAndDecrement();
 		peopleLeft.getAndIncrement();
-		notify();
+		this.notifyAll();
 		
 	}
 	//too many people inside
