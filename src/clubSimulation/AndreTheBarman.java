@@ -20,8 +20,9 @@ public class AndreTheBarman extends Thread {
 	private PeopleLocation myLocation;
 	private boolean inRoom;
 	private int ID; // thread ID
+	PeopleCounter tally;
 
-	AndreTheBarman(int noClubgoers, AtomicBoolean pause) throws InterruptedException {
+	AndreTheBarman(int noClubgoers, AtomicBoolean pause, PeopleCounter tally) throws InterruptedException {
 		this.ID = noClubgoers;
 		movingSpeed = 500; // range of speeds for customers
 		inRoom = true; // not in room yet
@@ -29,6 +30,7 @@ public class AndreTheBarman extends Thread {
 		myLocation = new PeopleLocation(ID);
 		currentBlock = new GridBlock(0, 0, false, true, false);
 		this.andrePause = pause;
+		this.tally = tally;
 	}
 
 	// getter
@@ -93,6 +95,7 @@ public class AndreTheBarman extends Thread {
 	// AndreTheBarman enters club
 	public void enterClub() throws InterruptedException {
 		currentBlock = club.enterClub(myLocation); // enter through entrance
+		//tally.Andre();
 		inRoom = true;
 		myLocation.setColor(new Color(0));
 		//tallys.personEntered();

@@ -3,7 +3,7 @@ import java.util.concurrent.atomic.*;
 
 public class PeopleCounter {
 	private AtomicInteger peopleOutSide; //counter for people arrived but not yet in the building
-	private AtomicInteger peopleInside; //counter for patrons inside club
+	public AtomicInteger peopleInside; //counter for patrons inside club
 	private AtomicInteger peopleLeft; //counter for patrons who have left the club
 	private AtomicInteger maxPeople; //maximum patrons allowed in the club at one time
 	
@@ -41,14 +41,20 @@ public class PeopleCounter {
 	
 	//someone got inside
 	synchronized public void personEntered() {
+		while(this.overCapacity()){try{wait();}catch(InterruptedException e){}}
 		peopleOutSide.getAndDecrement();
 		peopleInside.getAndIncrement();
+	}
+	//
+	synchronized public void Andre(){
+		peopleInside.getAndDecrement();
 	}
 
 	//someone left
 	synchronized public void personLeft() {
 		peopleInside.getAndDecrement();
 		peopleLeft.getAndIncrement();
+		notify();
 		
 	}
 	//too many people inside

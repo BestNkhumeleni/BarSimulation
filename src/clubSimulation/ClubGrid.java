@@ -12,7 +12,7 @@ public class ClubGrid {
 	public AndreTheBarman bartender;
 	
 	private GridBlock exit;
-	private GridBlock entrance; //hard coded entrance
+	public GridBlock entrance; //hard coded entrance
 	private final static int minX =5;//minimum x dimension
 	private final static int minY =5;//minimum y dimension
 	
@@ -80,10 +80,15 @@ public class ClubGrid {
 	}
 	
 	public GridBlock enterClub(PeopleLocation myLocation) throws InterruptedException  {
-		while(entrance.occupied()){} // checks if entrace is occupied first
-		entrance.get(myLocation.getID());
-		myLocation.setLocation(entrance);
-		myLocation.setInRoom(true);
+		
+		synchronized(entrance){
+			counter.personArrived();
+			while(entrance.occupied()){entrance.wait();} // checks if entrace is occupied first
+			entrance.get(myLocation.getID());
+			myLocation.setLocation(entrance);
+			myLocation.setInRoom(true);
+			counter.personEntered();
+		}
 		return entrance;
 	}
 	

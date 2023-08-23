@@ -21,7 +21,7 @@ public class Clubgoer extends Thread {
 	private boolean inRoom;
 	private boolean thirsty;
 	private boolean wantToLeave;
-	PeopleCounter tallys;
+	
 
 	private int ID; // thread ID
 
@@ -33,7 +33,7 @@ public class Clubgoer extends Thread {
 		thirsty = true; // thirsty when arrive
 		wantToLeave = false; // want to stay when arrive
 		rand = new Random();
-		this.tallys = tallys;
+		
 		this.pause = pause;
 	}
 
@@ -77,18 +77,7 @@ public class Clubgoer extends Thread {
 			}	
 		}
 	}
-	public synchronized void Capacity() throws InterruptedException{
-		Random nap = new Random();
-		sleep(rand.nextInt(100));
-		if(!this.inRoom()){
-			while(tallys.overCapacity()){
-				try{
-				sleep(nap.nextInt(100));}// check if the capacity has changed in random intervals
-				catch(InterruptedException e){}
-			}
-		}
-	}
-
+	
 	synchronized void setConditionTrue() {
 		pause.set(true);
 		// notifyAll(); // Notifies all waiting threads to wake up
@@ -140,12 +129,15 @@ public class Clubgoer extends Thread {
 
 	// go to bar
 	private void headToBar() throws InterruptedException {
+		
 		int x_mv = rand.nextInt(3) - 1; // -1,0 or 1
 		int y_mv = Integer.signum(club.getBar_y() - currentBlock.getY());// -1,0 or 1
 		currentBlock = club.move(currentBlock, x_mv, y_mv, myLocation); // head toward bar
 		System.out.println("Thread " + this.ID + " moved toward bar to position: " + currentBlock.getX() + " "
 				+ currentBlock.getY());
 		sleep(movingSpeed / 2); // wait a bit
+		synchronized(club.entrance){
+		club.entrance.notify();}
 	}
 
 	// go head towards exit
@@ -203,12 +195,11 @@ public class Clubgoer extends Thread {
 			checkPause();
 			myLocation.setArrived();
 			System.out.println("Thread " + this.ID + " arrived at club"); // output for checking
-			tallys.personArrived();
-			Capacity(); //checks if the club is at capacity and waits outside
+
 			checkPause(); // check whether have been asked to pause
 			enterClub();
 			inRoom = true;
-			tallys.personEntered();
+			
 			while (inRoom) {
 				checkPause(); // check every step
 				if ((!thirsty) && (!wantToLeave)) {
