@@ -80,6 +80,7 @@ public class ClubSimulation {
 		});
 
 		final JButton pauseB = new JButton("Pause ");
+	
 		;
 		int[] eve = { 1 };
 		// add the listener to the jbutton to handle the "pressed" event
@@ -90,10 +91,12 @@ public class ClubSimulation {
 						pause.set(false);
 						pause.notifyAll();
 						System.out.println("Unpaused");
+						pauseB.setText("Pause");
 					} else {
 						pause.set(true);
 						pause.notifyAll();
 						System.out.println("paused");
+						pauseB.setText("Resume");
 					}
 				}
 				eve[0] = eve[0] + 1;

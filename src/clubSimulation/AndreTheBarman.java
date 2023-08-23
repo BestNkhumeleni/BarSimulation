@@ -98,7 +98,7 @@ public class AndreTheBarman extends Thread {
 		myLocation.setColor(new Color(0));
 		//tallys.personEntered();
 		System.out.println(
-				"Thread " + this.ID + " entered club at position: " + currentBlock.getX() + " " + currentBlock.getY());
+				"Andre is in the building yall!");
 		
 	}
 	// go to bar
@@ -170,6 +170,7 @@ public class AndreTheBarman extends Thread {
 					moveRight();
 					sleep(movingSpeed);
 					checkandrePause();
+
 					//System.out.println(myLocation.getX());
 				}
 			}
