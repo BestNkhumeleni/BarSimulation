@@ -155,11 +155,8 @@ public class AndreTheBarman extends Thread {
 		try {
 			startSim();
 			checkandrePause(); // check whether have been asked to andrePause
-			
 			enterClub();
 			headToBar();
-			
-			
 			
 			while (inRoom) {
 				checkandrePause(); // check every step
