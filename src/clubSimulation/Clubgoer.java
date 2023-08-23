@@ -81,18 +81,12 @@ public class Clubgoer extends Thread {
 		Random nap = new Random();
 		sleep(rand.nextInt(100));
 		if(!this.inRoom()){
-			tallys.personArrived();
-		}
-		if(!this.inRoom()){
 			while(tallys.overCapacity()){
 				try{
 				sleep(nap.nextInt(100));}// check if the capacity has changed in random intervals
 				catch(InterruptedException e){}
-		
 			}
-		
 		}
-		
 	}
 
 	synchronized void setConditionTrue() {
@@ -203,13 +197,13 @@ public class Clubgoer extends Thread {
 
 	public void run() {
 		try {
-	
 			startSim();
 			checkPause();
 			sleep(movingSpeed * (rand.nextInt(100) + 1)); // arriving takes a while
 			checkPause();
 			myLocation.setArrived();
 			System.out.println("Thread " + this.ID + " arrived at club"); // output for checking
+			tallys.personArrived();
 			Capacity(); //checks if the club is at capacity and waits outside
 			checkPause(); // check whether have been asked to pause
 			enterClub();
