@@ -15,7 +15,6 @@ public class AndreTheBarman extends Thread {
 	public static ClubGrid club; // shared club
 
 	GridBlock currentBlock;
-	private Random rand;
 	private int movingSpeed;
 
 	private PeopleLocation myLocation;
@@ -26,7 +25,7 @@ public class AndreTheBarman extends Thread {
 		this.ID = noClubgoers;
 		movingSpeed = 500; // range of speeds for customers
 		inRoom = true; // not in room yet
-		rand = new Random();
+		new Random();
 		myLocation = new PeopleLocation(ID);
 		currentBlock = new GridBlock(0, 0, false, true, false);
 		this.andrePause = pause;
@@ -161,16 +160,25 @@ public class AndreTheBarman extends Thread {
 			while (inRoom) {
 				checkandrePause(); // check every step
 				while(!(myLocation.getX() == 0)){
+					GridBlock serve = club.whichBlock(myLocation.getX()-1, myLocation.getY()-1);
 					moveLeft();
 					sleep(movingSpeed);
 					checkandrePause();
+					if(serve.occupied()){
+						//moveRight();
+						sleep(movingSpeed*5);
+					}
 					//System.out.println(myLocation.getX());
 				}
 				while(!(myLocation.getX() == club.getMaxX()-1)){
+					GridBlock serve = club.whichBlock(myLocation.getX()+1, myLocation.getY()-1);
 					moveRight();
 					sleep(movingSpeed);
 					checkandrePause();
-
+					if(serve.occupied()){
+						//moveLeft();
+						sleep(movingSpeed*5);
+					}
 					//System.out.println(myLocation.getX());
 				}
 			}

@@ -117,14 +117,20 @@ public class Clubgoer extends Thread {
 			}
 		}
 	}
+	private synchronized void getServed()throws InterruptedException{
+		GridBlock serve = club.whichBlock(myLocation.getX(), myLocation.getY()+1);
+		while(!serve.occupied()){sleep(1);} //wait to be served by andre
+
+	}
 
 	// get drink at bar
 	private void getDrink() throws InterruptedException {
 		// FIX SO BARMAN GIVES THE DRINK AND IT IS NOT AUTOMATIC
 		// andre moves left and right and stops when there a someone at the bar
 		thirsty = false;
+		getServed();
 		System.out.println(
-				"Thread " + this.ID + " got drink at bar position: " + currentBlock.getX() + " " + currentBlock.getY());
+				"Thread " + this.ID + " got drink at bar position from Andre: " + currentBlock.getX() + " " + currentBlock.getY());
 		sleep(movingSpeed * 5); // wait a bit
 	}
 
