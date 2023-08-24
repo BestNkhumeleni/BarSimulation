@@ -1,0 +1,179 @@
+commit b7eeb61ebc5edb96cfcb48abb3f50d57003ba117
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 23 23:19:44 2023 +0200
+
+    everything looks good
+
+commit a37b16bd74ff461eb15de0c08ee5d839b95f9fdb
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 23 22:55:26 2023 +0200
+
+    andre is no longer counted
+
+commit 51852426b5e5d109318fe061a7b0c4c1a56a238f
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 23 22:47:06 2023 +0200
+
+    one more than neccesary
+
+commit 784b65c713868629486aa5ac44ade51ac92b7028
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 23 15:59:40 2023 +0200
+
+    andre is working
+
+commit f6198eb394f14e1332f03906f90f5642c94e194c
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 23 15:51:15 2023 +0200
+
+    andre V2
+
+commit 5749e92053a9b6314d810c7052cdfc616f42b84b
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 23 14:47:46 2023 +0200
+
+    andre V1
+
+commit 87edc3c2f6066122b942b37612485f826ff3606f
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 23 14:15:39 2023 +0200
+
+    andre v1
+
+commit a8f0c34836bd5860dfeb40873a4d59683dd4d801
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 23 14:14:04 2023 +0200
+
+    andre v1
+
+commit 823e296fdb3acddef084d3b9fac53f6ff2bcbe13
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Tue Aug 22 22:58:18 2023 +0200
+
+    everything is working now
+
+commit e9de5b7b02f7f8bff758da0557b6ea6933d95df5
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Tue Aug 22 22:17:09 2023 +0200
+
+    pause fixed
+
+commit 505318d1c374180ac9b7d6825e9614ef37db3ba5
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Tue Aug 22 18:44:44 2023 +0200
+
+    can't pause and cant keep track
+
+commit ef21aee3b5b991033dbb183cc775fceef76c4ad7
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Tue Aug 22 17:24:01 2023 +0200
+
+    entrance and exit fixed
+
+commit 486a03b5a1b7dbcf7a394f4deb55a5b4250c32be
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Tue Aug 22 16:54:11 2023 +0200
+
+    a bunch of stuf works now
+
+commit 8ca04e862ce33d0de17f12dc07cc492dc735ac33
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Mon Aug 21 22:00:25 2023 +0200
+
+    andre is invisible
+
+commit 01cbf8e2e0695b4539cd9618d319092ef04e3948
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Mon Aug 21 21:40:39 2023 +0200
+
+    andre
+
+commit 03a354006a6735414c3a19c2716d281b734b7b0f
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Mon Aug 21 19:38:20 2023 +0200
+
+    lets see what that andre do
+
+commit 4928e594240d687bfb4dcc0de482be32b24210a4
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Mon Aug 21 19:36:12 2023 +0200
+
+    lets see what that andre do
+
+commit 470f9794555c38dff738f9354df3dd0d2d06c0f1
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Mon Aug 21 16:59:00 2023 +0200
+
+    start is now fixed
+
+commit 65d2955740076e8edf07f6af712a88187c48cb4d
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Mon Aug 21 14:56:01 2023 +0200
+
+    the unpause is now working
+
+commit 582f544fc5f8a88d694d2db84dbcb7f8ab65c91c
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Mon Aug 21 14:27:42 2023 +0200
+
+    now we can pause, but no unpause
+
+commit 9a1fb9309c70a7cc02a0e228feefc86249350cae
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Mon Aug 21 13:29:47 2023 +0200
+
+    pause kinda works
+
+commit 818c4cb10a81d6e4662a2542da93306b5bd1039c
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Sun Aug 20 01:45:48 2023 +0200
+
+    start button works
+
+commit 1b49fe46bffd2b97265f030461cdc3fe68846452
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Sun Aug 20 01:44:48 2023 +0200
+
+    start button works
+
+commit a246be6707460fec6519c592d5135042dd85c75e
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Fri Aug 18 11:33:00 2023 +0200
+
+    starting stages
+
+commit b3c7b16949f66569e7b9ba2dd281fa620fd0a444
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Fri Aug 18 10:41:31 2023 +0200
+
+    started from the bottom
+
+commit 0204a8139a96325030176487c1560bd9a307ad24
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 16 23:15:38 2023 +0200
+
+    first test run
+
+commit af38bc8ca85f37fa910a7cb1f09593d3bd2533e1
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 16 23:15:00 2023 +0200
+
+    first test run
+
+commit 4f19ffd08a4ae4812feb4a294e47339a96f39419
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 16 23:04:02 2023 +0200
+
+    automatically run the program
+
+commit 9b3e44d14b311624859d57e515202377e1b8c005
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Wed Aug 16 22:39:10 2023 +0200
+
+    first commit
+
+commit e4ecd55a562324e879c84070590e9b1b50294ab0
+Author: BestNkhumeleni <69164057+BestNkhumeleni@users.noreply.github.com>
+Date:   Wed Aug 16 15:06:56 2023 +0200
+
+    Initial commit
