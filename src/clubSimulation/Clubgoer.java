@@ -2,6 +2,7 @@
 package clubSimulation;
 
 import java.util.Random;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /*
@@ -9,64 +10,54 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 
 public class Clubgoer extends Thread {
-	public AtomicBoolean pause;
-	public AtomicBoolean start = new AtomicBoolean(false);
-	public static ClubGrid club; // shared club
+	
+	public static ClubGrid club; //shared club
 
 	GridBlock currentBlock;
 	private Random rand;
 	private int movingSpeed;
-
+	AtomicBoolean pause;
+	AtomicBoolean start = new AtomicBoolean(false);
 	private PeopleLocation myLocation;
 	private boolean inRoom;
 	private boolean thirsty;
 	private boolean wantToLeave;
 	
+	private int ID; //thread ID 
 
-	private int ID; // thread ID
-
-	Clubgoer(int ID, PeopleLocation loc, int speed, PeopleCounter tallys, AtomicBoolean pause) {
-		this.ID = ID;
-		movingSpeed = speed; // range of speeds for customers
-		this.myLocation = loc; // for easy lookups
-		inRoom = false; // not in room yet
-		thirsty = true; // thirsty when arrive
-		wantToLeave = false; // want to stay when arrive
-		rand = new Random();
-		
+	
+	Clubgoer( int ID,  PeopleLocation loc,  int speed, AtomicBoolean pause) {
+		this.ID=ID;
+		movingSpeed=speed; //range of speeds for customers
+		this.myLocation = loc; //for easy lookups
+		inRoom=false; //not in room yet
+		thirsty=true; //thirsty when arrive
+		wantToLeave=false;	 //want to stay when arrive
+		rand=new Random();
 		this.pause = pause;
 	}
+	
+	public Clubgoer(int i, PeopleLocation peopleLocation, int movingSpeed2, PeopleCounter tallys,AtomicBoolean pause2) {
+		this(i,peopleLocation,movingSpeed2,pause2);
+	}
 
-	// getter
-	public boolean inRoom() {
+	//getter
+	public  boolean inRoom() {
 		return inRoom;
 	}
+	
+	//getter
+	public   int getX() { return currentBlock.getX();}	
+	
+	//getter
+	public   int getY() {	return currentBlock.getY();	}
+	
+	//getter
+	public   int getSpeed() { return movingSpeed; }
 
-	synchronized void setStartTrue() {
-		synchronized (start) {
-			start.set(true);
-			start.notifyAll();
-		}
-	}
+	//setter
 
-	// getter
-	public int getX() {
-		return currentBlock.getX();
-	}
-
-	// getter
-	public int getY() {
-		return currentBlock.getY();
-	}
-
-	// getter
-	public int getSpeed() {
-		return movingSpeed;
-	}
-
-	// setter
-
-	// check to see if user pressed pause button
+	//check to see if user pressed pause button
 	private void checkPause() {
 		synchronized (pause) {
 			while (pause.get()) {
@@ -78,18 +69,6 @@ public class Clubgoer extends Thread {
 		}
 	}
 	
-	synchronized void setConditionTrue() {
-		pause.set(true);
-		// notifyAll(); // Notifies all waiting threads to wake up
-	}
-
-	synchronized void setConditionFalse() {
-		synchronized (pause) {
-			pause.set(false);
-			pause.notifyAll();
-		}
-	}
-
 	private void startSim() {
 		synchronized (start) {
 			while (!start.get()) {
@@ -99,25 +78,24 @@ public class Clubgoer extends Thread {
 				}
 			}
 		}
+        
+    }
+	synchronized void setStartTrue() {
+		synchronized (start) {
+			start.set(true);
+			start.notifyAll();
+		}
 	}
-	private synchronized void getServed()throws InterruptedException{
-		GridBlock serve = club.whichBlock(myLocation.getX(), myLocation.getY()+1);
-		while(!serve.occupied()){sleep(1);} //wait to be served by andre
-
-	}
-
-	// get drink at bar
-	private void getDrink() throws InterruptedException {
-		// FIX SO BARMAN GIVES THE DRINK AND IT IS NOT AUTOMATIC
-		// andre moves left and right and stops when there a someone at the bar
-		thirsty = false;
-		getServed();
-		System.out.println(
-				"Thread " + this.ID + " got drink at bar position from Andre: " + currentBlock.getX() + " " + currentBlock.getY());
-		sleep(movingSpeed * 5); // wait a bit
-	}
-
-		//--------------------------------------------------------
+	//get drink at bar
+		private void getDrink() throws InterruptedException {
+			GridBlock serve = club.whichBlock(myLocation.getX(), myLocation.getY()+1);
+			while(!serve.occupied()){sleep(1);} 
+			thirsty=false;
+			System.out.println("Thread "+this.ID + " got drink at bar position: " + currentBlock.getX()  + " " +currentBlock.getY() );
+			sleep(movingSpeed*5);  //wait a bit
+		}
+		
+	//--------------------------------------------------------
 	//DO NOT CHANGE THE CODE BELOW HERE - it is not necessary
 	//clubgoer enters club
 	public void enterClub() throws InterruptedException {
@@ -129,7 +107,6 @@ public class Clubgoer extends Thread {
 	
 	//go to bar
 	private void headToBar() throws InterruptedException {
-		club.entracenowopen();
 		int x_mv= rand.nextInt(3)-1;	//	-1,0 or 1
 		int y_mv= Integer.signum(club.getBar_y()-currentBlock.getY());//-1,0 or 1
 		currentBlock=club.move(currentBlock,x_mv,y_mv,myLocation); //head toward bar
@@ -147,12 +124,10 @@ public class Clubgoer extends Thread {
 		currentBlock=club.move(currentBlock,x_mv,y_mv,myLocation); 
 		System.out.println("Thread "+this.ID + " moved to towards exit: " + currentBlock.getX()  + " " +currentBlock.getY() );
 		sleep(movingSpeed);  //wait a bit
-		club.entracenowopen();
 	}
 	
 	//dancing in the club
-	private void dance() throws InterruptedException {	
-		club.entracenowopen();	
+	private void dance() throws InterruptedException {		
 		for(int i=0;i<3;i++) { //sequence of 3
 
 			int x_mv= rand.nextInt(3)-1; //-1,0 or 1
@@ -181,7 +156,6 @@ public class Clubgoer extends Thread {
 	private void leave() throws InterruptedException {
 		club.leaveClub(currentBlock,myLocation);		
 		inRoom=false;
-		club.entracenowopen();
 	}
 	
 	public void run() {

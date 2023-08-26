@@ -84,6 +84,7 @@ public class ClubGrid {
 		synchronized(entrance){
 			while(entrance.occupied()){entrance.wait();} // checks if entrace is occupied first
 			counter.personEntered();
+			entrance.notifyAll();
 			entrance.get(myLocation.getID());
 			myLocation.setLocation(entrance);
 			myLocation.setInRoom(true);
