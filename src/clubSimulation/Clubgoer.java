@@ -141,13 +141,13 @@ public class Clubgoer extends Thread {
 	
 	//go head towards exit
 	private void headTowardsExit() throws InterruptedException {
-		club.entracenowopen();
 		GridBlock exit= club.getExit();
 		int x_mv= Integer.signum(exit.getX()-currentBlock.getX());//x_mv is -1,0 or 1
 		int y_mv= Integer.signum(exit.getY()-currentBlock.getY());//-1,0 or 1
 		currentBlock=club.move(currentBlock,x_mv,y_mv,myLocation); 
 		System.out.println("Thread "+this.ID + " moved to towards exit: " + currentBlock.getX()  + " " +currentBlock.getY() );
 		sleep(movingSpeed);  //wait a bit
+		club.entracenowopen();
 	}
 	
 	//dancing in the club
