@@ -1,3 +1,21 @@
+commit 1d0de848264c105b59adf945acfb0a2fa18d931d
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Sat Aug 26 18:25:33 2023 +0200
+
+    no more deadlocks
+
+commit 019198d75e7cccbd0ec59a529118d4670bbc4a33
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Sat Aug 26 12:35:49 2023 +0200
+
+    everything seems okay
+
+commit 7a014cebef42b1e8b002e55d37cde071ae339a77
+Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
+Date:   Sat Aug 26 12:27:44 2023 +0200
+
+    everything seems fine
+
 commit 73c8c6b0ea0d0bcc5f6621e26f16a75479ed632e
 Author: BestNkhumeleni <nkhbes001@myuct.ac.za>
 Date:   Thu Aug 24 13:20:20 2023 +0200

@@ -26,7 +26,7 @@ public class Clubgoer extends Thread {
 	private int ID; //thread ID 
 
 	
-	Clubgoer( int ID,  PeopleLocation loc,  int speed, AtomicBoolean pause) {
+	public Clubgoer( int ID,  PeopleLocation loc,  int speed, AtomicBoolean pause) {
 		this.ID=ID;
 		movingSpeed=speed; //range of speeds for customers
 		this.myLocation = loc; //for easy lookups
@@ -89,7 +89,7 @@ public class Clubgoer extends Thread {
 	//get drink at bar
 		private void getDrink() throws InterruptedException {
 			GridBlock serve = club.whichBlock(myLocation.getX(), myLocation.getY()+1);
-			while(!serve.occupied()){sleep(1);} 
+			while(!serve.occupied()){sleep(1);} // wait to get served by andre first
 			thirsty=false;
 			System.out.println("Thread "+this.ID + " got drink at bar position: " + currentBlock.getX()  + " " +currentBlock.getY() );
 			sleep(movingSpeed*5);  //wait a bit
@@ -112,6 +112,7 @@ public class Clubgoer extends Thread {
 		currentBlock=club.move(currentBlock,x_mv,y_mv,myLocation); //head toward bar
 		System.out.println("Thread "+this.ID + " moved toward bar to position: " + currentBlock.getX()  + " " +currentBlock.getY() );
 		sleep(movingSpeed/2);  //wait a bit
+		
 	}
 	
 	
