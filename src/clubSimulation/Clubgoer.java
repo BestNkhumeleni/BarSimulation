@@ -2,7 +2,6 @@
 package clubSimulation;
 
 import java.util.Random;
-import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /*
@@ -26,7 +25,7 @@ public class Clubgoer extends Thread {
 	private int ID; //thread ID 
 
 	
-	public Clubgoer( int ID,  PeopleLocation loc,  int speed, AtomicBoolean pause) {
+	Clubgoer( int ID,  PeopleLocation loc,  int speed, AtomicBoolean pause) {
 		this.ID=ID;
 		movingSpeed=speed; //range of speeds for customers
 		this.myLocation = loc; //for easy lookups
@@ -112,7 +111,7 @@ public class Clubgoer extends Thread {
 		currentBlock=club.move(currentBlock,x_mv,y_mv,myLocation); //head toward bar
 		System.out.println("Thread "+this.ID + " moved toward bar to position: " + currentBlock.getX()  + " " +currentBlock.getY() );
 		sleep(movingSpeed/2);  //wait a bit
-		
+		club.entracenowopen();
 	}
 	
 	
@@ -157,6 +156,7 @@ public class Clubgoer extends Thread {
 	private void leave() throws InterruptedException {
 		club.leaveClub(currentBlock,myLocation);		
 		inRoom=false;
+		
 	}
 	
 	public void run() {

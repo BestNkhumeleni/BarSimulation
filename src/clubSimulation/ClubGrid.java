@@ -95,8 +95,9 @@ public class ClubGrid {
 	}
 	
 	public synchronized void entracenowopen(){
-		synchronized(entrance){
-			entrance.notifyAll();
+		if((!counter.overCapacity()) || (counter.peopleInside.get() == 0)){
+			synchronized(entrance){
+			entrance.notifyAll();}
 		}
 	}
 	
@@ -133,11 +134,6 @@ public class ClubGrid {
 		int new_x = c_x+step_x; //new block x coordinates
 		int new_y = c_y+step_y; // new block y  coordinates
 		
-		//restrict i an j to grid
-		if (inPatronArea(new_x,new_y)) {
-			//Invalid move to outside  - ignore
-			return currentBlock;
-		}
 
 		if ((new_x==currentBlock.getX())&&(new_y==currentBlock.getY())) //not actually moving
 			return currentBlock;

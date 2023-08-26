@@ -103,12 +103,10 @@ public class AndreTheBarman extends Thread {
 		
 	}
 	// go to bar
-	private void headToBar() throws InterruptedException {
+	private void headToBar() throws InterruptedException { // as soon as andre comes in hea heads behind the bar
 		int x_mv = 0;
 		int y = club.getBar_y() +1;
-		
 		currentBlock = club.move(currentBlock, x_mv, y, myLocation, this); // head toward bar
-		//System.out.println(myLocation.getX());
 		System.out.println("Andre is at the bar");
 		sleep(movingSpeed / 2); // wait a bit
 	}
@@ -117,32 +115,36 @@ public class AndreTheBarman extends Thread {
 		int x_mv = -1;
 		int y = 0;
 		
-		currentBlock = club.move(currentBlock, x_mv, y, myLocation, this);
+		currentBlock = club.move(currentBlock, x_mv, y, myLocation, this); //moves andre to the left by one step
 	}
 
 	private void moveRight() throws InterruptedException {
 		int x_mv = 1;
 		int y = 0;
 		
-		currentBlock = club.move(currentBlock, x_mv, y, myLocation, this);
+		currentBlock = club.move(currentBlock, x_mv, y, myLocation, this); //moves andre to the Right by one step
 	}
 
 	// go head towards exit
+	//go head towards exit
 	private void headTowardsExit() throws InterruptedException {
-
-		GridBlock exit = club.getExit();
-		int x_mv = Integer.signum(exit.getX() - currentBlock.getX());// x_mv is -1,0 or 1
-		int y_mv = Integer.signum(exit.getY() - currentBlock.getY());// -1,0 or 1
-		currentBlock = club.move(currentBlock, x_mv, y_mv, myLocation);
-		System.out.println(
-				"Thread " + this.ID + " moved to towards exit: " + currentBlock.getX() + " " + currentBlock.getY());
-		sleep(movingSpeed); // wait a bit
+		GridBlock exit= club.getExit();
+		int x_mv= Integer.signum(exit.getX()-currentBlock.getX());//x_mv is -1,0 or 1
+		int y_mv= Integer.signum(exit.getY()-currentBlock.getY());//-1,0 or 1
+		currentBlock=club.move(currentBlock,x_mv,y_mv,myLocation, this); 
+		System.out.println("Thread "+this.ID + " moved to towards exit: " + currentBlock.getX()  + " " +currentBlock.getY() );
+		sleep(movingSpeed);  //wait a bit
 	}
 
 	// leave club
 	private void leave() throws InterruptedException {
 		club.leaveClub(currentBlock, myLocation);
 		inRoom = false;
+		//tally.personArrived();
+		//tally.personEntered();
+		System.out.println("The Bar is closed! Thanks for coming");
+		sleep(2000);
+		System.exit(0); //closes the program when andre leaves
 	}
 
 	synchronized void setStartTrue() {
@@ -161,7 +163,7 @@ public class AndreTheBarman extends Thread {
 			
 			while (inRoom) {
 				checkandrePause(); // check every step
-				while(!(myLocation.getX() == 0)){
+				while(!(myLocation.getX() == 0)){//move Right until you hit a wall
 					GridBlock serve = club.whichBlock(myLocation.getX()-1, myLocation.getY()-1);
 					moveLeft();
 					sleep(movingSpeed);
@@ -170,9 +172,9 @@ public class AndreTheBarman extends Thread {
 						//moveRight();
 						sleep(movingSpeed*5);
 					}
-					//System.out.println(myLocation.getX());
+				
 				}
-				while(!(myLocation.getX() == club.getMaxX()-1)){
+				while(!(myLocation.getX() == club.getMaxX()-1)){ //move Right until you hit a wall
 					GridBlock serve = club.whichBlock(myLocation.getX()+1, myLocation.getY()-1);
 					moveRight();
 					sleep(movingSpeed);
@@ -181,12 +183,14 @@ public class AndreTheBarman extends Thread {
 						//moveLeft();
 						sleep(movingSpeed*5);
 					}
-					//System.out.println(myLocation.getX());
+				
 				}
+				if((tally.getMax() == 0)||((tally.getWaiting() == 0) && (tally.getInside() == 0) && (tally.getLeft()>0))) {break;}
 			}
+
 			headTowardsExit();
 			leave();
-			System.out.println("The Bar is closed");
+			
 		} catch (InterruptedException e1) { // do nothing
 		}
 

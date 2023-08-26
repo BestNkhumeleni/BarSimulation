@@ -133,13 +133,13 @@ public class ClubSimulation {
 			gridY = Integer.parseInt(args[2]); // No. of Y grid cells
 			max = Integer.parseInt(args[3]); // max people allowed in club
 		}
-		andre = new AndreTheBarman(noClubgoers, pause, tallys);
+		
 		// hardcoded exit doors
 		int[] exit = { 0, (int) gridY / 2 - 1 }; // once-cell wide door on left
 
 		tallys = new PeopleCounter(max); // counters for people inside and outside club
 		clubGrid = new ClubGrid(gridX, gridY, exit, tallys); // setup club with size and exitsand maximum limit for
-																// people
+		andre = new AndreTheBarman(noClubgoers, pause, tallys);														// people
 		Clubgoer.club = clubGrid; // grid shared with class
 		AndreTheBarman.club = clubGrid;
 		peopleLocations = new PeopleLocation[noClubgoers];
