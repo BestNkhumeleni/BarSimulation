@@ -185,7 +185,7 @@ public class AndreTheBarman extends Thread {
 					}
 				
 				}
-				if((tally.getMax() == 0)||((tally.getWaiting() == 0) && (tally.getInside() == 0) && (tally.getLeft()>0))) {break;}
+				if((tally.getWaiting() == 0) && (tally.getInside() == 0) && (tally.getLeft()>0)) {break;}
 			}
 
 			headTowardsExit();
