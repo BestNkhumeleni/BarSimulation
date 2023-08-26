@@ -129,6 +129,7 @@ public class Clubgoer extends Thread {
 	
 	//go to bar
 	private void headToBar() throws InterruptedException {
+		club.entracenowopen();
 		int x_mv= rand.nextInt(3)-1;	//	-1,0 or 1
 		int y_mv= Integer.signum(club.getBar_y()-currentBlock.getY());//-1,0 or 1
 		currentBlock=club.move(currentBlock,x_mv,y_mv,myLocation); //head toward bar
@@ -140,6 +141,7 @@ public class Clubgoer extends Thread {
 	
 	//go head towards exit
 	private void headTowardsExit() throws InterruptedException {
+		club.entracenowopen();
 		GridBlock exit= club.getExit();
 		int x_mv= Integer.signum(exit.getX()-currentBlock.getX());//x_mv is -1,0 or 1
 		int y_mv= Integer.signum(exit.getY()-currentBlock.getY());//-1,0 or 1
@@ -149,7 +151,8 @@ public class Clubgoer extends Thread {
 	}
 	
 	//dancing in the club
-	private void dance() throws InterruptedException {		
+	private void dance() throws InterruptedException {	
+		club.entracenowopen();	
 		for(int i=0;i<3;i++) { //sequence of 3
 
 			int x_mv= rand.nextInt(3)-1; //-1,0 or 1
@@ -178,6 +181,7 @@ public class Clubgoer extends Thread {
 	private void leave() throws InterruptedException {
 		club.leaveClub(currentBlock,myLocation);		
 		inRoom=false;
+		club.entracenowopen();
 	}
 	
 	public void run() {

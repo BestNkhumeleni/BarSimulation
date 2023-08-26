@@ -82,19 +82,22 @@ public class ClubGrid {
 	public GridBlock enterClub(PeopleLocation myLocation) throws InterruptedException  {
 		counter.personArrived();
 		synchronized(entrance){
-			
 			while(entrance.occupied()){entrance.wait();} // checks if entrace is occupied first
 			counter.personEntered();
 			entrance.get(myLocation.getID());
 			myLocation.setLocation(entrance);
 			myLocation.setInRoom(true);
-			
 			if (i == 0){counter.Andre();}
 			i++;
 		}
 		return entrance;
 	}
 	
+	public synchronized void entracenowopen(){
+		synchronized(entrance){
+			entrance.notifyAll();
+		}
+	}
 	
 	public GridBlock move(GridBlock currentBlock,int step_x, int step_y,PeopleLocation myLocation) throws InterruptedException {  //try to move in 
 		
